@@ -92,7 +92,7 @@ That's all there is to the first statement, our first choice is that $$x$$ is in
 
 First, we need to have a clear intuition of what a dot product does, that is tell us if two vectors are "pointing in the same direction". In $$\mathbb{R}^2$$ saying that $$u \cdot v = u^T v < 0$$ means that if we consider the plane $$P$$ orthogonal to $$u$$, then $$u$$ and $$v$$ are on opposite sides of $$P$$.<br>
 With that being said, let's look at the conditions in this second part:<br>
-$$(b^T)y < 0$$: this means that $b$ and $y$ have an angle between them that is above $$\frac{pi}{2}$$<br>
+$$(b^T)y < 0$$: this means that $$b$$ and $$y$$ have an angle between them that is above $$\frac{\pi}{2}$$<br>
 $$(A^T)y \geq 0$$: the product $$(A^T)y$$ is none other than the vector
 $$
 \begin{pmatrix}
