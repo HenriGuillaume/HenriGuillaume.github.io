@@ -45,18 +45,16 @@ date: 2024-10-31
     }
 </style>
 
-<!-- Content with LaTeX -->
+
 On the surface, this post is a visual explaination of Farkas' lemma, which mind you, isn't a difficult lemma to visualise, but still has a great geometrical interpretation. However, my main goal when writing this was to experiment with [Manim](https://www.manim.community/) and creating "interactive" animations. 
 
 Let's start by the lemma's statement:
 
 <div class="theorem">
     <h4>Farkas' lemma</h4>
-    For a matrix $$A \in \mathbb{R}^{m \times n}$$ and $$b \in \mathbb{R}^{m}$$ one and only one of these two things are true:\
-
-    - There exists $$x \in \mathbb{R}^{n}$$ such that $$Ax = b$$ and $$x \geq 0$$\
-
-    - There exists $$y \in \mathbb{R}^{m}$$such that $$(A^T)y \geq 0$$ and $$(b^T)y < 0$$
+    For a matrix \(A \in \mathbb{R}^{m \times n}\) and \(b \in \mathbb{R}^{m}\) one and only one of these two things are true:<br>
+    - There exists \(x \in \mathbb{R}^{n}\) such that \(Ax = b\) and \(x \geq 0\) <br>
+    - There exists \(y \in \mathbb{R}^{m}\) such that \((A^T)y \geq 0\) and \((b^T)y < 0\)
 </div>
 
 The part of this theorem that may be unusual is the fact that we put an order on our vector space. Here when we say $$x \leq 0$$ we mean that each component of $x$ is less or equal than zero.
@@ -73,7 +71,8 @@ $$
 We will denote $$v_1$$ and $$v_2$$ the columns of this matrix.
 
 With this order defined, the first statement can be rephrased by saying "$$b$$ is the image of a point $$x$$ in the first quadrant of the plane". Let's have a look at how $$A$$ transforms the first quadrant of the plane by applying it to points with positive coordinates.
-
+<br>
+Move the slider to operate the transformation, you might need to play with it a little before it becomes smooth enough.
 <!-- Animation 1 -->
 <div id="image-container-1">
     <img id="animation-image-1" src="/assets/farkas/shear_frames/frame0001.jpg" alt="Animation Frame 1">
@@ -82,20 +81,101 @@ With this order defined, the first statement can be rephrased by saying "$$b$$ i
 
 We can see that we obtain a *cone* that we will call $$S$$.
 
+<video id="autoplay-video" width="600" muted playsinline>
+    <source src="/assets/farkas/cone.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
+
+That's all there is to the first statement, our first choice is that $$x$$ is in the cone defined by $$A$$. So what's the alternative?
+
+## The second part of the alternative
+
+First, we need to have a clear intuition of what a dot product does, that is tell us if two vectors are "pointing in the same direction". In $$\mathbb{R}^2$$ saying that $$u \cdot v = u^T v < 0$$ means that if we consider the plane $$P$$ orthogonal to $$u$$, then $$u$$ and $$v$$ are on opposite sides of $$P$$.<br>
+With that being said, let's look at the conditions in this second part:<br>
+$$(b^T)y < 0$$: this means that $b$ and $y$ have an angle between them that is above $$\frac{pi}{2}$$<br>
+$$(A^T)y \geq 0$$: the product $$(A^T)y$$ is none other than the vector
+$$
+\begin{pmatrix}
+v_{1} \cdot y\\
+v_{2} \cdot y
+\end{pmatrix}
+$$,
+which is positive when $$y$$ "faces the same direction" as both $$v_1$$ and $$v_2$$. 
+(Visually, this means that $$y$$ is in both of the half planes colored in white in the animation you will find a little further down below.)
+<br>
+The point of this post is not to go into detail about how one might prove this, see [this page](https://people.orie.cornell.edu/dpw/orie6300/fall2008/Lectures/lec07.pdf) for a rigorous proof. However, we'll outline the main idea: it relies on the [Hyperplane separation theorem](https://en.wikipedia.org/wiki/Hyperplane_separation_theorem) in Euclidean space. <br>
+
+The idea is that, no matter how close $$b$$ is to our cone $$S$$, as long as it is not in it, we can squeeze a hyperplane (in our case, a line) between $$b$$ and $$S$$. (This relies on the fact that $$S$$ is closed and convex and $${b}$$ is compact.)
+This hyperplane is defined by a vector $$y$$ that verifies $$y \cdot s < 0$$ for all $$s \in S$$
 <!-- Animation 2 -->
 <div id="image-container-2">
     <img id="animation-image-2" src="/assets/farkas/hp_frames/frame0001.jpg" alt="Animation Frame 2">
 </div>
 <input type="range" id="slider-2" min="1" max="300" value="1" step="1">
 
+It comes pretty naturally that picking $$-y$$ gives us a natural candidate for our alternative (the $$y$$ in our alternative is our $$-y$$ here, I did not think this through beforehand).
 <!-- Animation 3 -->
 <div id="image-container-3">
     <img id="animation-image-3" src="/assets/farkas/flippedy_frames/frame0001.jpg" alt="Animation Frame 3">
 </div>
 <input type="range" id="slider-3" min="1" max="200" value="1" step="1">
 
+I hope this little post has made this lemma a little clearer for some of you! If you wish to know how the "interactive" animations were created, I'll explain it here. I mut say that most of the HTML and Javascript was written by ChatGPT, as webdev is something I have no intention of learning anytime soon:
 
-<!-- JavaScript Code -->
+## Step one: create animations unsing Manim
+
+As I said earlier, the animations were made using [Manim](https://www.manim.community/). So go ahead and create your animation, keep in mind that this little "hack" is restricted to animations in "one dimension", which is why they work with a slider. Export your scenes as short mp4 files with a reasonably high framerate.
+
+## Step two: chop the images
+
+Using [ffmpeg](https://www.ffmpeg.org/), save the frames of your video by running ```ffmpeg -i your_video.mp4 -vf "fps=30" frames/frame%04d.jpg``` this will save all of the frames in your video to a dedicated folder.
+
+## Step three: embed the images and add a slider
+
+For this step, I'm just gonna give you the code. Just make sure that you replace the parameters in the functio call at the end
+### Javascript code
+
+<pre><code class="language-javascript">
+function initFrameAnimation(framePath, totalFrames, imageElementId, sliderElementId) {
+        const animationImage = document.getElementById(imageElementId);
+        const slider = document.getElementById(sliderElementId);
+
+        if (!animationImage || !slider) {
+            console.error('Invalid element IDs provided.');
+            return;
+        }
+
+        slider.min = 1;
+        slider.max = totalFrames;
+        slider.value = 1;
+        slider.step = 1;
+
+        function getFrameSrc(frameNumber) {
+            const frameString = String(frameNumber).padStart(4, '0');
+            return framePath + frameString + '.jpg';
+        }
+
+        slider.addEventListener('input', function() {
+            const frameNumber = parseInt(slider.value);
+            animationImage.src = getFrameSrc(frameNumber);
+        });
+
+        function preloadImages(start, end) {
+            for (let i = start; i <= end; i++) {
+                const img = new Image();
+                img.src = getFrameSrc(i);
+            }
+        }
+
+        preloadImages(1, Math.min(totalFrames, 10));
+    }
+
+    // Initialize animations
+    initFrameAnimation('/assets/your_video/frame', number_of_frames_in_your_vid, 'animation-image-1', 'slider-1');
+</code></pre>
+
+
+<!-- JavaScript Code for the interactions-->
 <script>
     /**
      * Function to initialize the frame-by-frame animation with a slider.
@@ -138,4 +218,36 @@ We can see that we obtain a *cone* that we will call $$S$$.
     initFrameAnimation('/assets/farkas/flippedy_frames/frame', 52, 'animation-image-3', 'slider-3');
     initFrameAnimation('/assets/farkas/hp_frames/frame', 50, 'animation-image-2', 'slider-2');
     initFrameAnimation('/assets/farkas/shear_frames/frame', 95, 'animation-image-1', 'slider-1');
+</script>
+
+<!-- JavaScript Code for the videos autoplaying-->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const video = document.getElementById("autoplay-video");
+
+        // Ensure IntersectionObserver is supported
+        if ("IntersectionObserver" in window) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        video.play();
+                    } else {
+                        video.pause();
+                    }
+                });
+            }, { threshold: 0.5 }); // Trigger when 50% of the video is in view
+
+            observer.observe(video);
+        } else {
+            // Fallback for browsers without IntersectionObserver support
+            window.addEventListener("scroll", function() {
+                const rect = video.getBoundingClientRect();
+                if (rect.top < window.innerHeight && rect.bottom > 0) {
+                    video.play();
+                } else {
+                    video.pause();
+                }
+            });
+        }
+    });
 </script>
