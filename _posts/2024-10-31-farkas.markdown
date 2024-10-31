@@ -57,7 +57,7 @@ Let's start by the lemma's statement:
     - There exists \(y \in \mathbb{R}^{m}\) such that \((A^T)y \geq 0\) and \((b^T)y < 0\)
 </div>
 
-The part of this theorem that may be unusual is the fact that we put an order on our vector space. Here when we say $$x \leq 0$$ we mean that each component of $x$ is less or equal than zero.
+The part of this theorem that may be unusual is the fact that we put an order on our vector space. Here when we say $$x \leq 0$$ we mean that each component of $$x$$ is less or equal than zero.
 
 ## The first part of the alternative
 
