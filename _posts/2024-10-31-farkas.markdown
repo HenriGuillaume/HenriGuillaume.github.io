@@ -122,7 +122,7 @@ It comes pretty naturally that picking $$-y$$ gives us a natural candidate for o
 
 I hope this little post has made this lemma a little clearer for some of you! If you wish to know how the "interactive" animations were created, I'll explain it here. I mut say that most of the HTML and Javascript was written by ChatGPT, as webdev is something I have no intention of learning anytime soon:
 
-## Step one: create animations unsing Manim
+## Step one: create animations using Manim
 
 As I said earlier, the animations were made using [Manim](https://www.manim.community/). So go ahead and create your animation, keep in mind that this little "hack" is restricted to animations in "one dimension", which is why they work with a slider. Export your scenes as short mp4 files with a reasonably high framerate.
 
