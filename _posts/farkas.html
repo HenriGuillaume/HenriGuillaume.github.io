@@ -8,19 +8,19 @@
 <body>
     <!-- Animation 1 -->
     <div id="image-container-1">
-        <img id="animation-image-1" src="media/shear_frames/frame0001.jpg" alt="Animation Frame 1">
+        <img id="animation-image-1" src="/assets/farkas/shear_frames/frame0001.jpg" alt="Animation Frame 1">
     </div>
     <input type="range" id="slider-1" min="1" max="300" value="1" step="1">
 
     <!-- Animation 2 -->
     <div id="image-container-2">
-        <img id="animation-image-2" src="media/hp_frames/frame0001.jpg" alt="Animation Frame 2">
+        <img id="animation-image-2" src="/assets/farkas/hp_frames/frame0001.jpg" alt="Animation Frame 2">
     </div>
     <input type="range" id="slider-2" min="1" max="300" value="1" step="1">
 
     <!-- Animation 3 -->
     <div id="image-container-3">
-        <img id="animation-image-3" src="media/flippedy_frames_frames/frame0001.jpg" alt="Animation Frame 3">
+        <img id="animation-image-3" src="/assets/farkas/flippedy_frames_frames/frame0001.jpg" alt="Animation Frame 3">
     </div>
     <input type="range" id="slider-3" min="1" max="200" value="1" step="1">
 
@@ -64,9 +64,9 @@
         }
 
         // Initialize animations
-        initFrameAnimation('media/flippedy_frames/frame', 52, 'animation-image-3', 'slider-3');
-        initFrameAnimation('media/hp_frames/frame', 50, 'animation-image-2', 'slider-2');
-        initFrameAnimation('media/shear_frames/frame', 95, 'animation-image-1', 'slider-1');
+        initFrameAnimation('/assets/farkas/flippedy_frames/frame', 52, 'animation-image-3', 'slider-3');
+        initFrameAnimation('/assets/farkas/hp_frames/frame', 50, 'animation-image-2', 'slider-2');
+        initFrameAnimation('/assets/farkas/shear_frames/frame', 95, 'animation-image-1', 'slider-1');
     </script>
 </body>
 </html>
