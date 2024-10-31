@@ -52,27 +52,27 @@ Let's start by the lemma's statement:
 
 <div class="theorem">
     <h4>Farkas' lemma</h4>
-    For a matrix \(A \in \mathbb{R}^{m \times n}\) and \(b \in \mathbb{R}^{m}\) one and only one of these two things are true:\\
+    For a matrix $$A \in \mathbb{R}^{m \times n}$$ and $$b \in \mathbb{R}^{m}$$ one and only one of these two things are true:\
 
-    - There exists \(x \in \mathbb{R}^{n}\) such that \(Ax = b\) and \(x \geq 0\)\\
+    - There exists $$x \in \mathbb{R}^{n}$$ such that $$Ax = b$$ and $$x \geq 0$$\
 
-    - There exists \(y \in \mathbb{R}^{m}\)such that \((A^T)y \geq 0\) and \((b^T)y < 0\)
+    - There exists $$y \in \mathbb{R}^{m}$$such that $$(A^T)y \geq 0$$ and $$(b^T)y < 0$$
 </div>
 
-The part of this theorem that may be unusual is the fact that we put an order on our vector space. Here when we say $x \leq 0$ we mean that each component of $x$ is less or equal than zero.
+The part of this theorem that may be unusual is the fact that we put an order on our vector space. Here when we say $$x \leq 0$$ we mean that each component of $x$ is less or equal than zero.
 
 ## The first part of the alternative
 
 For illustration purposes, we will place ourselves in $$\mathbb{R}^2$$ with a matrix 
-\[
+$$
 \begin{pmatrix}
 1 & 3\\
 2 & 1
 \end{pmatrix}
-\]
-We will denote \(v_1\) and \(v_2\) the columns of this matrix.
+$$
+We will denote $$v_1$$ and $$v_2$$ the columns of this matrix.
 
-With this order defined, the first statement can be rephrased by saying "\(b\) is the image of a point \(x\) in the first quadrant of the plane". Let's have a look at how \(A\) transforms the first quadrant of the plane by applying it to points with positive coordinates.
+With this order defined, the first statement can be rephrased by saying "$$b$$ is the image of a point $$x$$ in the first quadrant of the plane". Let's have a look at how $$A$$ transforms the first quadrant of the plane by applying it to points with positive coordinates.
 
 <!-- Animation 1 -->
 <div id="image-container-1">
@@ -80,7 +80,7 @@ With this order defined, the first statement can be rephrased by saying "\(b\) i
 </div>
 <input type="range" id="slider-1" min="1" max="300" value="1" step="1">
 
-We can see that we obtain a *cone* that we will call \(S\).
+We can see that we obtain a *cone* that we will call $$S$$.
 
 <!-- Animation 2 -->
 <div id="image-container-2">
