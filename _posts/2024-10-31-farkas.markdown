@@ -7,6 +7,7 @@ date: 2024-10-31
 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
+<!-- CSS for the animations and sliders -->
 <style>
     /* Make sliders fit the width of their container */
     input[type="range"] {
@@ -23,8 +24,34 @@ date: 2024-10-31
     }
 </style>
 
+<!-- CSS for the theorem boxes-->
+<style>
+    .theorem {
+        border: 2px solid #007BFF;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+        padding: 15px;
+        margin: 20px 0;
+        font-family: Arial, sans-serif;
+    }
+
+    .theorem h4 {
+        margin: 0;
+        font-weight: bold;
+    }
+</style>
+
 <!-- Content with LaTeX -->
-<p>Here is an equation: \( E = mc^2 \)</p>
+On the surface, this post is a visual explaination of Farkas' lemma, which mind you, isn't a difficult lemma to visualise, but still has a great geometrical interpretation. However, my main goal when writing this was to experiment with [Manim](https://www.manim.community/) and creating "interactive" animations. 
+
+Let's start by the lemma's statement:
+
+<div class="theorem">
+    <h4>Farkas' lemma</h4>
+    For a matrix \(A \in \mathbb{R}^{m \times n}\) and \(b \in \mathbb{R}^{m}\) one and only one of these two things are true:
+    - There exists \(x \in \mathbb{R}^{n}\) such that \(Ax = b\) and \(x \geq 0\)
+    - There exists \(y \in \mathbb{R}^{m}\)such that \((A^T)y \geq 0\) and \((b^T)y < 0\)
+</div>
 
 <!-- Animation 1 -->
 <div id="image-container-1">
