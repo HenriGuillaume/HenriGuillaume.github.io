@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Optimal group testing | Henri Guillaume</title>
+<meta name="generator" content="Jekyll v4.3.4" />
+<meta property="og:title" content="Optimal group testing" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Maths" />
+<meta property="og:description" content="Maths" />
+<link rel="canonical" href="http://localhost:4000/2024/11/08/group_testing.html" />
+<meta property="og:url" content="http://localhost:4000/2024/11/08/group_testing.html" />
+<meta property="og:site_name" content="Henri Guillaume" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2024-11-08T00:00:00+01:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Optimal group testing" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2024-11-08T00:00:00+01:00","datePublished":"2024-11-08T00:00:00+01:00","description":"Maths","headline":"Optimal group testing","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2024/11/08/group_testing.html"},"url":"http://localhost:4000/2024/11/08/group_testing.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Henri Guillaume" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Henri Guillaume</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Optimal group testing</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2024-11-08T00:00:00+01:00" itemprop="datePublished">Nov 8, 2024
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <head>
+    <!-- Other head elements -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<h1 id="optimal-group-testing">OPTIMAL GROUP TESTING</h1>
+
+<p>This notebook is an intereactive explanation of the paper “Optimal Group Testing” (2020) by Amin Coja-Oghlan, Oliver Gebhard, Max Hahn-Klimroth and Philipp Loick. The paper can be found <a href="https://proceedings.mlr.press/v125/coja-oghlan20a.html">here</a>.<br />
+All credit is evidently due to them, this is merely a class project.</p>
+
+<h2 id="a-little-context">A little context</h2>
+<p>Let’s say that you’re a military doctor, charged with testing your whole army for syphilis. Unfortunately, you need to pay, say 50$ per sample of blood that you test, that could quickly get expensive!<br />
+However, your name is Robert DORFMAN, and you get the idea that you can get the same amount of information without testing each soldier individually, the idea is the following:<br />
+You mix the blood that you drew from your soldiers in <em>groups</em>, and you test the mixed blood samples for syphilis, so that a <span style="color: red;">positive</span> result tells you that <em>at least one</em> soldier in the group is infected.<br />
+Now imagine that you get really lucky, and that a pool of blood from 5 soldiers tests <span style="color: green;">negative,</span> you know that none of them are infected, and you effectively saved 4 tests! (that’s 200$ you can spend on the toyota supra you’ve been saving for!)</p>
+
+<h2 id="problem-setup">Problem setup</h2>
+
+<p>We are given a population of size \(n\), and a number \(k\) of infected or “defective” individuals. (Note that the term “defective” isn’t meant to be reductive of ill people, group testing has applications in manufacturing of certain components).<br />
+We assume that
+\(k \sim n^\theta\)
+meaning that the number of infected \(k\) is asymptotically proportional to \(n^\theta\), for a certain \(\theta \in (0,1)\) i.e. proportional for a large population.<br />
+You might ask the question:</p>
+
+<center>"Why is the proportion written as an exponent, instead of simply being a multiplicative constant?"</center>
+
+<p><br />
+This has to do with the fact that expressing the number of infected as \(n^\theta\) makes it grow <em>sublinearly</em> with population size, which is more realistic in more use cases.</p>
+
+<p>The whole point of what is coming is to answer the most basic classification problem in medicine:</p>
+<center><font size="6"> Who's sick? </font></center>
+
+<p>In more precise terms, given our \(n\) individuals \(\{x_1,..., x_n \}\), we have an unknown vector comprised of \(n-k\) zero-entries for healthy patients, and \(k\) one-entries for sick patients. We will denote this vector \(\sigma \in \{0,1\}^n\). When we say a vector of Hamming weight \(k\), we simply mean that there are \(k\) non-zero entries.<br />
+This gives us two goals:</p>
+<ul>
+  <li>Get an estimator \(\hat{\sigma}\) of \(\sigma\) that suceeds with high probability (<em>w.h.p.</em>)</li>
+  <li>Minimise the number of tests \(m\), and importantly find out how low we can make it</li>
+</ul>
+
+<p>There are two types of group testing:</p>
+
+<h3 id="non-adaptive-group-testing">Non adaptive group testing:</h3>
+<p>In this variant of the problem, we only have the right to one round of tests. This problem is relevant in practical applications as test results may take time to come, so doing \(R\) rounds of testing multiplies your waiting time by \(R\).</p>
+
+<h3 id="adaptive-group-testing">Adaptive group testing:</h3>
+<p>In this variant, we allow ourselves to do a first round, wait for the results, and then adapt our strategy to the acquired results. This is obviously advantageous over non adaptive testing as our choice of groups can be made more precise thanks to additional information.</p>
+
+<h2 id="first-ideas">First ideas</h2>
+
+<h3 id="the-random-bipartite-design-definitive-defectives">The random bipartite design, Definitive Defectives</h3>
+<p>In this test design, the individuals \(V = \{x_1, ..., x_n\}\) partake in \(\Delta\) tests, chosen uniformly at random among our \(m\) tests \(F = \{a_1, ..., a_m\}\). This is represented by a bipartite graph. This design is based upon two simple ideas:</p>
+<ol>
+  <li>Any patient \(x\) that appears in a *<span style="color: green;">negative*</span> test \(a\) is <span style="color: green;">negative
+2</span>. If a patient \(x\) appears in a <span style="color: red;">positive</span> test \(a\), and all other participants in \(a\) have been marked as uninfected during step 1, then \(x\) is <span style="color: red;">positive</span>. This is because x being postitive is the “only explaination” for \(a\) being <span style="color: red;">positive</span>.</li>
+</ol>
+
+<div style="text-align: center;">
+    <video src="/assets/SPIV/DD_total.mp4" style="width: 100%;" controls="" autoplay="" muted="" loop=""></video>
+    <p style="font-style: italic; color: #555; max-width: 100%; margin-top: 10px;">A very simple example of inference using definite defectives, diagnosing 4 patients with only 3 tests.</p>
+</div>
+
+<p>Obviously, this comes with a few caveats. As you can see, the fact that the test above works relies heavily on the fact that all three healthy patients join a test that the infected patient doesnt.<br />
+Therefore, if we have too few tests, too big a population, or a great proportion of infected, the algorithm fails. This is because we are at a greater risk of infected patients “poisoning the well” by making our preciously informative <span style="color: green;">negative tests</span> <span style="color: red;">positive</span>.</p>
+
+<div style="text-align: center;">
+    <video src="/assets/SPIV/DD_limitations.mp4" style="width: 100%;" controls="" autoplay="" muted="" loop=""></video>
+    <p style="font-style: italic; color: #555; max-width: 100%; margin-top: 10px;">"Poisoning the well", by reducing the number of tests and having \(x_1\) make both of our remaning tests <span style="color: red;">positive</span>, therefore containing very little information.</p>
+</div>
+
+<p>It is a good idea to pause and ponder about the functioning of definite defectives before moving on to the next part.</p>
+
+<h2 id="spiv">SPIV</h2>
+
+<p>This algorithm is the main topic if this text. SPIV, or <strong>Spatial Inference Vertex Cover</strong> is an non-adaptive algorithm that allows us to infer \(\sigma\) w.h.p. with a minimum number of tests \(m_{SPIV}\) that is asymptotically better than the number \(m_{DD}\) that definite defective requires. Please not that the key word here is <strong>asymptotically</strong>. We will come back to this later.<br />
+In the following, we will discuss and try to illsutrate the different stages SPIV, as described in the paper.<br />
+I will ask you to not get frightened or stuck on the mathematical details, and try to focus on the ideas of the algortihm.</p>
+<h3 id="a-little-intuition">A little intuition</h3>
+<p>Let’s start with what I think are good insights to motivate this design.</p>
+<ol>
+  <li><strong>It makes sense to diagnose <em>locally</em>:</strong> An algorithm like definite defectives connects anyone to anyone else at random. When dealing with a very large population, this doesn’t seem very realistic, and one might be tempted to “divide and conquer” the problem.</li>
+  <li><strong>The problem <em>isn’t linear in nature</em>:</strong> With the previous insight in mind, you might think something along the lines of “let’s divide our population of size \(n\) into 5 groups then!”. However, as \(n\) grows, you will obvioulsy encounter the same problem as before, so your denominator has to depend on \(n\). It also has to grow slower than \(n\) (why?), \(\log(n)\) is a rather natural choice.</li>
+  <li><strong>It makes sense to <em>link compartments</em>:</strong> Imagine you have divided all of the individuals in one of your subgroups. Having this subgroup cut off from the rest of the population would be a waste of information, hence the idea of linking them.</li>
+</ol>
+
+<p><em>Nota bene</em>: when we say that tests (respectively patients) are “linked”, we simply mean that they share patients (respectively tests) in common.</p>
+
+<h3 id="phase-0-setting-up-the-ring">Phase 0: Setting up the ring</h3>
+<p>As the title says, the algorithm relies on a <em>ring structure</em>. No algebra there, it simply means that we divide our patients and our tests into compartments and that patients share tests with other patients from following compartments, hence the last compartment shares tests with the first compartments (so that it is also linked), and we obtain a ring.</p>
+
+<div style="text-align: center;">
+    <video src="/assets/SPIV/ring_creation.mp4" style="width: 100%;" controls="" autoplay="" muted="" loop=""></video>
+    <p style="font-style: italic; color: #555; max-width: 100%; margin-top: 10px;">The SPIV ring structure, keep in mind that the number of tests, test compartments and the links do not have the value SPIV would give them. In fact, for this few patients, SPIV often gives more tests than patients.</p>
+</div>
+
+<p>Here are the constants that we need to determine the ring:</p>
+<ul>
+  <li>\(\mathbf{l}\): The number of compartments our patients and tests are divided into (leaving population compartments of size \(\frac{n}{l}\))</li>
+  <li>\(\mathbf{F[1], ... ,F[l]}\): The test compartments (partition of \(\{a_1, ... , a_{m_{SPIV}}\}\))</li>
+  <li>\(\mathbf{V[1], ... ,V[l]}\): The patient compartments (partition of \(\{x_1, ... , x_{n}\}\))</li>
+  <li>\(\mathbf{s, \Delta}\): A patient in \(F[i]\)  can (and must) choose \(\frac{\Delta}{s}\) tests in each of the compartments \(F[i+1], ..., F[i+s-1]\). These tests are chosen uniformly at random <em>with replacement</em>. This means a patient can join the same test several time. More on that later.</li>
+  <li>\(\mathbf{m, m_{add}}\): The number of tests and <em>additional tests</em>, we will explain the reason for these later. This gives us compartments of size \(\frac{m}{l}\) and one additional compartment \(\mathbf{F[0]}\) of additional tests.</li>
+</ul>
+
+<p>From there, we will try and build this algorithm by “<a href="https://en.m.wikipedia.org/wiki/Mathematical_induction">induction</a>”. That is we will answer the two questions:</p>
+<ol>
+  <li>How can we use the information we have about a compartment to better diagnose other compartments? (heredity)</li>
+  <li>How do we diagnose the first compartment to start the process? (pushing the first domino, <em>a.k.a.</em> initialization)</li>
+</ol>
+
+<h3 id="heredity">Heredity</h3>
+<p>Suppose that we have diagnosed all compartments \(V[1], ..., V[i]\), how do we diagnose \(V[i+1]\)?<br />
+As earlier, patients who have taken a <span style="color: green;">negative test</span>, must be <span style="color: green;">negative.</span> We cannot say anything more about uninfected patients.<br />
+Our next task is to differentiate between <span style="color: red;">positive</span> and <span style="color: green;">negative patients</span> that partook in a <span style="color: red;">positive</span> test, respectively true postives and false postitives. The paper offers us a way to do so, that goes as follows: remember how we diagnosed <span style="color: red;">positive</span> patients in DD by finding those who were “the only explaination” for a test being <span style="color: red;">positive</span>? Well the idea here is similar: For a patient \(x\) in \(V[i+1]\), we look in the \(s\) next test compartments (including \(F[i+1]\)), and we count the number of tests that contain \(x\) but “hadn’t been explained up until now”.
+Thus we define: \(\mathbf{W_{x,j}}\) as the number of test in \(F[i+j]\) that do not contain an infected individual from \(V[1], ..., V[i]\)</p>
+
+<p><img src="/assets/SPIV/count.png" alt="image" /></p>
+<div style="text-align: center;">
+    <p style="font-style: italic; color: #555; max-width: 100%; margin-top: 10px;">Computing \(W\) for \(x_0^{i+1}\), we can see that in compartment \(F[i+1]\), it accounts for one test that wasnt explained before. However, in compartment \(F[i+2]\), even though it does belong to a <span style="color: red;">positive</span> test, this test is already explained by \(x_i^2\), and therefore gives us no information about \(x_0^{i+1}\), which could very well be <span style="color: green;">negative.</span></p>
+</div>
+
+<p>As illustrated above, you can see that if \(x \in V[i+1]\) often belongs to tests that had no previous explaination, it is likely to be infected. We therefore look at the quantity \(\mathbb{E}[W_{x,j}]\) to infer the state of \(x\).<br />
+However, we can (and in fact must) do a little better. Imagine that we are looking at \(F[i+1]\). Because compartments are only linked to tests <em>farther</em> along the ring, and \(V[1], ..., V[i]\) are not responsible for making \(F[i+1]\) <span style="color: red;">positive</span>,  there’s this idea that \(V[i+1]\) is the “last shot” at explaining why \(F[i+1]\) is <span style="color: red;">positive</span>.</p>
+
+<div style="text-align: center;">
+    <video src="/assets/SPIV/lastshot.mp4" style="width: 100%;" controls="" autoplay="" muted="" loop=""></video>
+    <p style="font-style: italic; color: #555; max-width: 100%; margin-top: 10px;">We can see that \(x_0^{i+1}\) is the only remaining explaination for \(a_0^{i+1}\) being <span style="color: red;">positive</span>. It therefore has to be <span style="color: red;">positive</span>.</p>
+</div>
+
+<p>Conversely, if we look at a <span style="color: red;">positive</span> test \(a \in F[i+s]\), even though it is connected to \(x\), the patient making \(a\) postive could still reside in the next compartments \(V[i+2], ..., V[i+s]\).</p>
+
+<div style="text-align: center;">
+    <video src="/assets/SPIV/firstshot.mp4" style="width: 100%;" controls="" autoplay="" muted="" loop=""></video>
+    <p style="font-style: italic; color: #555; max-width: 100%; margin-top: 10px;">Sure, \(x_0^{i+1}\) could be the reason \(a_0^{i+3}\) is <span style="color: red;">positive</span>, but because we know nothing about the other patients that have taken \(a_0^{i+3}\) (anyone of which could be the culprit), we cannot know if \(x_0^{i+1}\) is responsible.</p>
+</div>
+<p>This observation leads us to the idea of assigning weights \(\mathbf{w_j}\) to each \(W_{x,j}\), and we define \(W_x^* = \sum_{j=1}^{s-1}w_jW_{x,j}\) We then define a threshold for this value under which we are confident that \(x\) is <span style="color: green;">negative,</span> this is done by optimising the weights \(w_j\) that minimize the probability of false <span style="color: red;">positive</span>s being classified as true <span style="color: red;">positive</span> (see the paper for more detailed math).</p>
+
+<h4 id="heredity-cleanup-phase">Heredity: Cleanup phase</h4>
+<p>This step is all about correcting errors commited in the previous phase. For any \(x\) (that is not in the first \(s\) compartments as we will see below), we count the number of tests \(a\) containing \(x\) that do not have any other explaination. If there are enough such tests (more than \(\ln^{\frac{1}{4}}(n)\)), we infer that \(x\) is <span style="color: red;">positive</span>. Otherwise we say that \(x\) is healthy. We repeat this process \(\lceil \ln(n) \rceil\) times. The idea is that we gave each patients enough tests so that a postitive patient should have at least one test that they don’t share with any other <span style="color: red;">positive</span> patients.</p>
+
+<h3 id="initialization">Initialization</h3>
+<p>We now know how to diagnose \(V[i+1]\) once we have diagnosed \(V[1], ..., V[i]\), but this requires stqrting somewhere right? Well yes, and there’s really no tricks to getting the algorithm started: the idea is simply to use the “additional” compartment \(F[0]\) that we defined earlier to run definite defectives on the first \(s\) compartments. This ensures that the first \(s\) compartments are diagnose with high probability. We only use it on a small subset of our population, so we still get to keep the lower asymptotic number of tests needed by SPIV. Remember how we said we’d define what we mean by asymptotic earlier? Well now is the time.</p>
+
+<h2 id="discussion">Discussion</h2>
+<p>As we said earlier, the minimum number of tests \(m_{SPIV}\) that is asymptotically better than the number \(m_{DD}\) that definite defective requires. Actually, even better than that <em>it is as close as it can possibly get</em>. This means that no matter, the proportion, for \(n\) great enough, we get  \(m_{SPIV} &lt; m_{DD}\), however, it can be wise to look at what we mean by “great enough”. To get a feel for what this convergence rate might look like, I invite you to play around with the graph down below by adjusting the slider for \(n\). Try to figure out how many trials it takes to do better than definite defectives, or even to reach the theoretical limit for the required minimum number of tests.</p>
+
+<div style="text-align: center;">
+  <iframe src="https://www.desmos.com/calculator/66bsv1amrv" width="100%" height="500" style="border: 1px solid #ccc" frameborder="0"></iframe>
+  <p style="font-style: italic; color: #555; max-width: 100%; margin-top: 10px;">The \(x\)-coordinates correspond to our "proportion" of infected \(\theta\), the red curve is the information-theoretic limit, the green curve is \(m_{DD}\), and the blue curve is \(m_{SPIV}\)</p>
+</div>
+
+<p>This is not to undermine the greatness of this algortihm though. The fact that the authors managed to reach the theoretical limit \(m_{inf}\) is beautiful on it’s own. But seeing the convergence rate, the topic is, in my opinion, far from being fully explored.<br />
+I hope that you enjoyed reading this post, and that you learnt something from it!</p>
+
+  </div><a class="u-url" href="/2024/11/08/group_testing.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Henri Guillaume</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Henri Guillaume</li><li><a class="u-email" href="mailto:henri.guillaume@protonmail.com">henri.guillaume@protonmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/HenriGuillaume"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">HenriGuillaume</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Maths</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
