@@ -1,3 +1,9 @@
+---
+layout: post
+title: "Farkas' lemma"
+date: 2024-10-31
+---
+
 # OPTIMAL GROUP TESTING
 
 This notebook is an intereactive explanation of the paper "Optimal Group Testing" (2020) by Amin Coja-Oghlan, Oliver Gebhard, Max Hahn-Klimroth and Philipp Loick. The paper can be found here: https://proceedings.mlr.press/v125/coja-oghlan20a.html \
