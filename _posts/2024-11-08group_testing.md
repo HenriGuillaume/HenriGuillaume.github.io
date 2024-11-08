@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Farkas' lemma"
+title: "Optimal group testing"
 date: 2024-10-31
 ---
 
