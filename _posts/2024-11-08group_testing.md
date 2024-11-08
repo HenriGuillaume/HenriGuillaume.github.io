@@ -47,7 +47,7 @@ In this test design, the individuals $V = \{x_1, ..., x_n\}$ partake in $\Delta$
 
 
 <div class="video-container">
-    <video src="assets/output.mp4" controls autoplay muted loop playsinline></video>
+    <video src="assets/SPIV/output.mp4" controls autoplay muted loop playsinline></video>
 </div>
 
 ## SPIV
