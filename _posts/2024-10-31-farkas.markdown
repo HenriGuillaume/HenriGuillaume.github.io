@@ -132,7 +132,7 @@ Using [ffmpeg](https://www.ffmpeg.org/), save the frames of your video by runnin
 
 ## Step three: embed the images and add a slider
 
-For this step, I'm just gonna give you the code. Just make sure that you replace the parameters in the functio call at the end
+For this step, I'm just gonna give you the code. Just make sure that you replace the parameters in the function call at the end
 ### Javascript code
 
 <pre><code class="language-javascript">
