@@ -32,7 +32,7 @@ You might ask the question:
 <center>"Why is the proportion written as an exponent, instead of simply being a multiplicative constant?"</center>
 
 <br>
-This has to do with the fact that expressing the number of infected as $$n^\theta$$ makes it grow *sublinearly* with population size, which is more realistic in more use cases.
+This has to do with the fact that expressing the number of infected as $$n^\theta$$ makes it grow *sublinearly* with population size, which is more realistic in certain use cases. This expression is also more relevant when we talk about asymptotic results.
 
 The whole point of what is coming is to answer the most basic classification problem in medicine:
 <center><font size="6"> Who's sick? </font></center>
@@ -139,10 +139,10 @@ This step is all about correcting errors commited in the previous phase. For any
 We now know how to diagnose $$V[i+1]$$ once we have diagnosed $$V[1], ..., V[i]$$, but this requires stqrting somewhere right? Well yes, and there's really no tricks to getting the algorithm started: the idea is simply to use the "additional" compartment $$F[0]$$ that we defined earlier to run definite defectives on the first $$s$$ compartments. This ensures that the first $$s$$ compartments are diagnose with high probability. We only use it on a small subset of our population, so we still get to keep the lower asymptotic number of tests needed by SPIV. Remember how we said we'd define what we mean by asymptotic earlier? Well now is the time.
 
 ## Discussion
-As we said earlier, the minimum number of tests $$m_{SPIV}$$ that is asymptotically better than the number $$m_{DD}$$ that definite defective requires. Actually, even better than that *it is as close as it can possibly get*. This means that no matter, the proportion, for $$n$$ great enough, we get  $$m_{SPIV} < m_{DD}$$, however, it can be wise to look at what we mean by "great enough". To get a feel for what this convergence rate might look like, I invite you to play around with the graph down below by adjusting the slider for $$n$$. Try to figure out how many trials it takes to do better than definite defectives, or even to reach the theoretical limit for the required minimum number of tests.
+As we said earlier, the minimum number of tests $$m_{SPIV}$$ is asymptotically better than the number $$m_{DD}$$ that definite defective requires. Actually, even better than that *it is as close as it can possibly get*. This means that no matter, the proportion, for $$n$$ great enough, we get  $$m_{SPIV} < m_{DD}$$, however, it can be wise to look at what we mean by "great enough". To get a feel for what this convergence rate might look like, I invite you to play around with the graph down below by adjusting the slider for $$t = \theta$$. Try to figure out how many trials it takes to do better than definite defectives, or even to reach the theoretical limit for the required minimum number of tests.
 
 <div style="text-align: center;">
-  <iframe src="https://www.desmos.com/calculator/66bsv1amrv" width="100%" height="500" style="border: 1px solid #ccc" frameborder="0"></iframe>
+  <iframe src="https://www.desmos.com/calculator/ztbww89dcw" width="100%" height="500" style="border: 1px solid #ccc" frameborder="0"></iframe>
   <p style="font-style: italic; color: #555; max-width: 100%; margin-top: 10px;">The \(x\)-coordinates correspond to our "proportion" of infected \(\theta\), the red curve is the information-theoretic limit, the green curve is \(m_{DD}\), and the blue curve is \(m_{SPIV}\)</p>
 </div>
 
