@@ -1,4 +1,63 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2024-11-08T23:32:37+01:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Henri Guillaume</title><subtitle>Maths</subtitle><entry><title type="html">Optimal group testing</title><link href="http://localhost:4000/2024/11/08/group_testing.html" rel="alternate" type="text/html" title="Optimal group testing" /><published>2024-11-08T00:00:00+01:00</published><updated>2024-11-08T00:00:00+01:00</updated><id>http://localhost:4000/2024/11/08/group_testing</id><content type="html" xml:base="http://localhost:4000/2024/11/08/group_testing.html"><![CDATA[<head>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-09-12T15:10:03+01:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Henri Guillaume</title><subtitle>Maths</subtitle><entry><title type="html">A functional syllable-based neuroprosthesis</title><link href="http://localhost:4000/2025/09/12/b2txt.html" rel="alternate" type="text/html" title="A functional syllable-based neuroprosthesis" /><published>2025-09-12T00:00:00+01:00</published><updated>2025-09-12T00:00:00+01:00</updated><id>http://localhost:4000/2025/09/12/b2txt</id><content type="html" xml:base="http://localhost:4000/2025/09/12/b2txt.html"><![CDATA[<p>This post is a wrapper for a report (written in <a href="https://typst.app/">typst</a>!!!) about an extension of the work I did during my internship at <a href="https://www.institut-audition.fr/">Institut de l’Audition</a>.
+Since speech reconstruction is the central theme of this work, I have included some audios at the end of this post.</p>
+
+<h1 id="report">Report</h1>
+<iframe src="/assets/b2txt/main.pdf" width="100%" height="600px" style="border: none;">
+    This browser does not support PDFs. Please download the PDF to view it: 
+    <a href="/assets/files/sample.pdf">Download PDF</a>
+</iframe>
+
+<h1 id="results-audio-reconstruction-from-neural-features">Results: audio reconstruction from neural features</h1>
+<p>To demonstrate that the approach is indeed viable, here are some examples of <em>unseen</em> audio from the <em>validation set</em>. <strong>Please keep in mind that:</strong></p>
+<ul>
+  <li>This is a work in progress, I have not yet refined model architecture and optimized hyperparameters.</li>
+  <li>This is not the best performing example of the validation set. Examples that are phonetically closer to training data enjoy a near-perfect reconstruction for <em>all</em> layers.</li>
+</ul>
+
+<h2 id="target-sentence-a-lot-of-people-complain">Target sentence: “A lot of people complain”</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Predicted Layer</th>
+      <th>Audio reconstruction</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Layer 0</td>
+      <td><audio controls=""><source src="/assets/b2txt/audio/layer0.wav" type="audio/mpeg" />Your browser does not support the audio element.</audio></td>
+    </tr>
+    <tr>
+      <td>Layer 1</td>
+      <td><audio controls=""><source src="/assets/b2txt/audio/layer1.wav" type="audio/mpeg" />Your browser does not support the audio element.</audio></td>
+    </tr>
+    <tr>
+      <td>Layer 2</td>
+      <td><audio controls=""><source src="/assets/b2txt/audio/layer2.wav" type="audio/mpeg" />Your browser does not support the audio element.</audio></td>
+    </tr>
+    <tr>
+      <td>Layer 3</td>
+      <td><audio controls=""><source src="/assets/b2txt/audio/layer3.wav" type="audio/mpeg" />Your browser does not support the audio element.</audio></td>
+    </tr>
+    <tr>
+      <td>Layer 4</td>
+      <td><audio controls=""><source src="/assets/b2txt/audio/layer4.wav" type="audio/mpeg" />Your browser does not support the audio element.</audio></td>
+    </tr>
+    <tr>
+      <td>Layer 5 <strong>(best)</strong></td>
+      <td><audio controls=""><source src="/assets/b2txt/audio/layer5.wav" type="audio/mpeg" />Your browser does not support the audio element.</audio></td>
+    </tr>
+    <tr>
+      <td>Layer 6</td>
+      <td><audio controls=""><source src="/assets/b2txt/audio/layer6.wav" type="audio/mpeg" />Your browser does not support the audio element.</audio></td>
+    </tr>
+    <tr>
+      <td>Layer 7</td>
+      <td><audio controls=""><source src="/assets/b2txt/audio/layer7.wav" type="audio/mpeg" />Your browser does not support the audio element.</audio></td>
+    </tr>
+  </tbody>
+</table>]]></content><author><name></name></author><summary type="html"><![CDATA[This post is a wrapper for a report (written in typst!!!) about an extension of the work I did during my internship at Institut de l’Audition. Since speech reconstruction is the central theme of this work, I have included some audios at the end of this post.]]></summary></entry><entry><title type="html">Optimal group testing</title><link href="http://localhost:4000/2024/11/08/group_testing.html" rel="alternate" type="text/html" title="Optimal group testing" /><published>2024-11-08T00:00:00+00:00</published><updated>2024-11-08T00:00:00+00:00</updated><id>http://localhost:4000/2024/11/08/group_testing</id><content type="html" xml:base="http://localhost:4000/2024/11/08/group_testing.html"><![CDATA[<head>
     <!-- Other head elements -->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -26,7 +85,7 @@ You might ask the question:</p>
 <center>"Why is the proportion written as an exponent, instead of simply being a multiplicative constant?"</center>
 
 <p><br />
-This has to do with the fact that expressing the number of infected as \(n^\theta\) makes it grow <em>sublinearly</em> with population size, which is more realistic in more use cases.</p>
+This has to do with the fact that expressing the number of infected as \(n^\theta\) makes it grow <em>sublinearly</em> with population size, which is more realistic in certain use cases. This expression is also more relevant when we talk about asymptotic results.</p>
 
 <p>The whole point of what is coming is to answer the most basic classification problem in medicine:</p>
 <center><font size="6"> Who's sick? </font></center>
@@ -142,15 +201,15 @@ However, we can (and in fact must) do a little better. Imagine that we are looki
 <p>We now know how to diagnose \(V[i+1]\) once we have diagnosed \(V[1], ..., V[i]\), but this requires stqrting somewhere right? Well yes, and there’s really no tricks to getting the algorithm started: the idea is simply to use the “additional” compartment \(F[0]\) that we defined earlier to run definite defectives on the first \(s\) compartments. This ensures that the first \(s\) compartments are diagnose with high probability. We only use it on a small subset of our population, so we still get to keep the lower asymptotic number of tests needed by SPIV. Remember how we said we’d define what we mean by asymptotic earlier? Well now is the time.</p>
 
 <h2 id="discussion">Discussion</h2>
-<p>As we said earlier, the minimum number of tests \(m_{SPIV}\) that is asymptotically better than the number \(m_{DD}\) that definite defective requires. Actually, even better than that <em>it is as close as it can possibly get</em>. This means that no matter, the proportion, for \(n\) great enough, we get  \(m_{SPIV} &lt; m_{DD}\), however, it can be wise to look at what we mean by “great enough”. To get a feel for what this convergence rate might look like, I invite you to play around with the graph down below by adjusting the slider for \(n\). Try to figure out how many trials it takes to do better than definite defectives, or even to reach the theoretical limit for the required minimum number of tests.</p>
+<p>As we said earlier, the minimum number of tests \(m_{SPIV}\) is asymptotically better than the number \(m_{DD}\) that definite defective requires. Actually, even better than that <em>it is as close as it can possibly get</em>. This means that no matter, the proportion, for \(n\) great enough, we get  \(m_{SPIV} &lt; m_{DD}\), however, it can be wise to look at what we mean by “great enough”. To get a feel for what this convergence rate might look like, I invite you to play around with the graph down below by adjusting the slider for \(t = \theta\). Try to figure out how many trials it takes to do better than definite defectives, or even to reach the theoretical limit for the required minimum number of tests.</p>
 
 <div style="text-align: center;">
-  <iframe src="https://www.desmos.com/calculator/66bsv1amrv" width="100%" height="500" style="border: 1px solid #ccc" frameborder="0"></iframe>
+  <iframe src="https://www.desmos.com/calculator/ztbww89dcw" width="100%" height="500" style="border: 1px solid #ccc" frameborder="0"></iframe>
   <p style="font-style: italic; color: #555; max-width: 100%; margin-top: 10px;">The \(x\)-coordinates correspond to our "proportion" of infected \(\theta\), the red curve is the information-theoretic limit, the green curve is \(m_{DD}\), and the blue curve is \(m_{SPIV}\)</p>
 </div>
 
 <p>This is not to undermine the greatness of this algortihm though. The fact that the authors managed to reach the theoretical limit \(m_{inf}\) is beautiful on it’s own. But seeing the convergence rate, the topic is, in my opinion, far from being fully explored.<br />
-I hope that you enjoyed reading this post, and that you learnt something from it!</p>]]></content><author><name></name></author><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Farkas’ lemma</title><link href="http://localhost:4000/2024/10/31/farkas.html" rel="alternate" type="text/html" title="Farkas’ lemma" /><published>2024-10-31T00:00:00+01:00</published><updated>2024-10-31T00:00:00+01:00</updated><id>http://localhost:4000/2024/10/31/farkas</id><content type="html" xml:base="http://localhost:4000/2024/10/31/farkas.html"><![CDATA[<head>
+I hope that you enjoyed reading this post, and that you learnt something from it!</p>]]></content><author><name></name></author><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Farkas’ lemma</title><link href="http://localhost:4000/2024/10/31/farkas.html" rel="alternate" type="text/html" title="Farkas’ lemma" /><published>2024-10-31T00:00:00+00:00</published><updated>2024-10-31T00:00:00+00:00</updated><id>http://localhost:4000/2024/10/31/farkas</id><content type="html" xml:base="http://localhost:4000/2024/10/31/farkas.html"><![CDATA[<head>
     <!-- Other head elements -->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>

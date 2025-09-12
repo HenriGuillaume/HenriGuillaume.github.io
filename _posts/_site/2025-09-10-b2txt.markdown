@@ -1,0 +1,27 @@
+<style>
+.responsive-pdf {
+  position: relative;
+  padding-bottom: 75%;
+  height: 0;
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+.responsive-pdf iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+</style>
+
+## Part 1: PDF
+
+<div class="responsive-pdf">
+  <iframe src="/assets/b2txt25/main.pdf"></iframe>
+</div>
+
+## Audio Commentary
+

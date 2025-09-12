@@ -1,0 +1,37 @@
+---
+layout: post
+title: "A functional syllable-based neuroprosthesis"
+date: 2025-09-12
+---
+
+This post is a wrapper for a report (written in [typst](https://typst.app/)!!!) about an extension of the work I did during my internship at [Institut de l'Audition](https://www.institut-audition.fr/).
+Since speech reconstruction is the central theme of this work, I have included some audios at the end of this post.
+
+# Report
+<iframe 
+    src="/assets/b2txt/main.pdf" 
+    width="100%" 
+    height="600px" 
+    style="border: none;">
+    This browser does not support PDFs. Please download the PDF to view it: 
+    <a href="/assets/files/sample.pdf">Download PDF</a>
+</iframe>
+
+# Results: audio reconstruction from neural features
+To demonstrate that the approach is indeed viable, here are some examples of _unseen_ audio from the _validation set_. **Please keep in mind that:**
+- This is a work in progress, I have not yet refined model architecture and optimized hyperparameters.
+- This is not the best performing example of the validation set. Examples that are phonetically closer to training data enjoy a near-perfect reconstruction for _all_ layers.
+
+## Target sentence: "A lot of people complain"
+
+| Predicted Layer   | Audio reconstruction |
+|-------------------|----------------------|
+| Layer 0 | <audio controls><source src="/assets/b2txt/audio/layer0.wav" type="audio/mpeg">Your browser does not support the audio element.</audio> |
+| Layer 1 | <audio controls><source src="/assets/b2txt/audio/layer1.wav" type="audio/mpeg">Your browser does not support the audio element.</audio> |
+| Layer 2 | <audio controls><source src="/assets/b2txt/audio/layer2.wav" type="audio/mpeg">Your browser does not support the audio element.</audio> |
+| Layer 3 | <audio controls><source src="/assets/b2txt/audio/layer3.wav" type="audio/mpeg">Your browser does not support the audio element.</audio> |
+| Layer 4 | <audio controls><source src="/assets/b2txt/audio/layer4.wav" type="audio/mpeg">Your browser does not support the audio element.</audio> |
+| Layer 5 **(best)** | <audio controls><source src="/assets/b2txt/audio/layer5.wav" type="audio/mpeg">Your browser does not support the audio element.</audio> |
+| Layer 6 | <audio controls><source src="/assets/b2txt/audio/layer6.wav" type="audio/mpeg">Your browser does not support the audio element.</audio> |
+| Layer 7 | <audio controls><source src="/assets/b2txt/audio/layer7.wav" type="audio/mpeg">Your browser does not support the audio element.</audio> |
+
